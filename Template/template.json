@@ -765,19 +765,19 @@
       },
       {
         "container": "/app/video",
-        "bind": "/portainer/Files/AppData/Youtube/Video"
+        "bind": "/srv/dev-disk-by-label-Files/YouTube/Video"
       },
       {
         "container": "/app/subscriptions",
-        "bind": "/portainer/Files/AppData/Youtube/Subscriptions"
+        "bind": "/srv/dev-disk-by-label-Files/YouTube/Subscriptions"
       },
       {
         "container": "/app/users",
-        "bind": "/portainer/Files/AppData/Youtube/Users"
+        "bind": "/srv/dev-disk-by-label-Files/YouTube/Users"
       },
       {
         "container": "/app/audio",
-        "bind": "/portainer/Files/AppData/Youtube/Audio"
+        "bind": "/srv/dev-disk-by-label-Files/YouTube/Audio"
       }
     ]
   }
