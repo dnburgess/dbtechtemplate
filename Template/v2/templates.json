@@ -1,0 +1,787 @@
+{
+	"version": "2",
+	"templates": [
+		{
+			"categories": [
+				"Other",
+				"Tools"
+			],
+			"description": "This is a Bitwarden server API implementation written in Rust compatible with upstream Bitwarden clients*, perfect for self-hosted deployment where running the official resource-heavy service might not be ideal..",
+			"image": "bitwardenrs/server:latest",
+			"logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/bitwarden.png",
+			"name": "bitwardenrs",
+			"note": "This project is not associated with the Bitwarden project nor 8bit Solutions LLC.",
+			"platform": "linux",
+			"ports": [
+				"80/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Bitwarden RS",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/srv/dev-disk-by-label-Files/Config/Bitwarden-rs",
+					"container": "/config"
+				}
+			]
+		},
+		{
+			"categories": [
+				"Other",
+				"Tools"
+			],
+			"description": "Embystat is a personal web server that can calculate all kinds of statistics from your (local) Emby server. Just install this on your server and let him calculate all kinds of fun stuff.",
+			"image": "linuxserver/embystat:latest",
+			"logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/embystat.png",
+			"name": "embystat",
+			"note": "Access the ui at your-ip:6555. Follow the setup wizard on initial install. Then configure the required services.",
+			"platform": "linux",
+			"ports": [
+				"6555:6555/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "EmbyStat",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/srv/dev-disk-by-label-Files/Config/EmbyStat",
+					"container": "/config"
+				}
+			]
+		},
+		{
+			"categories": [
+				"Downloaders",
+				"Tools"
+			],
+			"description": "Jackett works as a proxy server it translates queries from apps like Sonarr etc into tracker-site-specific http queries and parses the html response sending results back to the requesting software.[",
+			"env": [
+				{
+					"default": "998",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "100",
+					"label": "PGID",
+					"name": "PGID"
+				}
+			],
+			"image": "linuxserver/jackett:latest",
+			"logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/jacket-icon.png",
+			"name": "jackett",
+			"platform": "linux",
+			"ports": [
+				"9117:9117/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Jackett",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/srv/dev-disk-by-label-Files/Config/Jackett",
+					"container": "/config"
+				},
+				{
+					"bind": "/portainer/Downloads",
+					"container": "/downloads"
+				}
+			]
+		},
+		{
+			"categories": [
+				"Cloud",
+				"Web",
+				"Management",
+				"Photos"
+			],
+			"description": "Lychee is a free photo-management tool, which runs on your server or web-space. Installing is a matter of seconds. Upload, manage and share photos like from a native application. Lychee comes with everything you need and all your photos are stored securely.",
+			"env": [
+				{
+					"default": "998",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "100",
+					"label": "PGID",
+					"name": "PGID"
+				}
+			],
+			"image": "linuxserver/lychee:latest",
+			"logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/lychee-icon.png",
+			"name": "lychee",
+			"platform": "linux",
+			"ports": [
+				"80/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Lychee",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/srv/dev-disk-by-label-Files/Config/Lychee",
+					"container": "/config"
+				},
+				{
+					"bind": "/portainer/Pictures",
+					"container": "/pictures"
+				}
+			]
+		},
+		{
+			"categories": [
+				"Cloud",
+				"Productivity",
+				"Tools",
+				"Other",
+				"Web"
+			],
+			"description": "Where are your photos and documents? With Nextcloud you pick a server of your choice, at home, in a data center or at a provider. And that is where your files will be. Nextcloud runs on that server, protecting your data and giving you access from your desktop or mobile devices.",
+			"env": [
+				{
+					"default": "998",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "100",
+					"label": "PGID",
+					"name": "PGID"
+				},
+				{
+					"label": "TZ",
+					"name": "TZ"
+				},
+				{
+					"label": "DATABASE_PASSWORD",
+					"name": "DATABASE_PASSWORD"
+				},
+				{
+					"label": "MYSQL_ROOT_PASSWORD",
+					"name": "MYSQL_ROOT_PASSWORD"
+				},
+				{
+					"label": "PORT",
+					"name": "PORT"
+				}
+			],
+			"logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/nextcloud-icon.png",
+			"name": "nextcloud",
+			"note": "The database user is nextcloud and the database is nextcloud_db. The host of the database will be located at the bottom of the DB conotainer in portainer.",
+			"platform": "linux",
+			"repository": {
+				"stackfile": "Template/Stack/nextcloud.yml",
+				"url": "https://github.com/SelfhostedPro/selfhosted_templates"
+			},
+			"title": "Nextcloud",
+			"type": 3
+		},
+		{
+			"categories": [
+				"Proxy",
+				"Tools"
+			],
+			"description": "Nginx Proxy Manager enables you to easily forward to your websites running at home or otherwise, including free SSL, without having to know too much about Nginx or Letsencrypt.",
+			"image": "jlesage/nginx-proxy-manager",
+			"logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/proxy_mgr.png",
+			"name": "nginx-proxy-manager",
+			"platform": "linux",
+			"ports": [
+				"80:8080/tcp",
+				"81:8181/tcp",
+				"443:4443/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Nginx Proxy Manager",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/srv/dev-disk-by-label-Files/Config/Nginx-Proxy",
+					"container": "/config"
+				}
+			]
+		},
+		{
+			"categories": [
+				"Other"
+			],
+			"description": "OpenVPN Access Server is a full featured secure network tunneling VPN software solution that integrates OpenVPN server capabilities, enterprise management capabilities, simplified OpenVPN Connect UI, and OpenVPN Client software packages that accommodate Windows, MAC, Linux, Android, and iOS environments.",
+			"env": [
+				{
+					"label": "INTERFACE",
+					"name": "INTERFACE",
+					"set": "eth0"
+				},
+				{
+					"default": "998",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "100",
+					"label": "PGID",
+					"name": "PGID"
+				}
+			],
+			"image": "linuxserver/openvpn-as:latest",
+			"logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/openvpn-as-icon.png",
+			"name": "openvpn-as",
+			"platform": "linux",
+			"ports": [
+				"943:943/tcp",
+				"9443:9443/tcp",
+				"1194:1194/udp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "OpenVPN Access Server",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/srv/dev-disk-by-label-Files/Config/OpenVPN-AS",
+					"container": "/config"
+				}
+			]
+		},
+		{
+			"categories": [
+				"Wiki"
+			],
+			"description": "Bookstack is a free and open source Wiki designed for creating beautiful documentation. Feautring a simple, but powerful WYSIWYG editor it allows for teams to create detailed and useful documentation with ease.",
+			"env": [
+				{
+					"default": "998",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "100",
+					"label": "PGID",
+					"name": "PGID"
+				},
+				{
+					"label": "TZ",
+					"name": "TZ"
+				},
+				{
+					"label": "DATABASE_PASSWORD",
+					"name": "DATABASE_PASSWORD"
+				},
+				{
+					"label": "MYSQL_ROOT_PASSWORD",
+					"name": "MYSQL_ROOT_PASSWORD"
+				},
+				{
+					"label": "PORT",
+					"name": "PORT"
+				}
+			],
+			"logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/bookstack2.png",
+			"note": "Default login is admin@admin.com with a password of password. The database created is called bookstackapp and the database user is called bookstack",
+			"platform": "linux",
+			"repository": {
+				"stackfile": "Template/Stack/bookstack.yml",
+				"url": "https://github.com/SelfhostedPro/selfhosted_templates"
+			},
+			"title": "Bookstack",
+			"type": 3
+		},
+		{
+			"categories": [
+				"Other",
+				"Tools",
+				"Photo"
+			],
+			"description": "Chevereto is a powerful and fast image hosting script that allows you to create your very own full featured image hosting website in just minutes. Please note that this offers only the free Chevereto version..",
+			"env": [
+				{
+					"default": "998",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "100",
+					"label": "PGID",
+					"name": "PGID"
+				},
+				{
+					"label": "CHEVERETO_DB_HOST",
+					"name": "CHEVERETO_DB_HOST",
+					"set": ""
+				},
+				{
+					"label": "CHEVERETO_DB_USERNAME",
+					"name": "CHEVERETO_DB_USERNAME",
+					"set": ""
+				},
+				{
+					"label": "CHEVERETO_DB_PASSWORD",
+					"name": "CHEVERETO_DB_PASSWORD",
+					"set": ""
+				},
+				{
+					"label": "CHEVERETO_DB_NAME",
+					"name": "CHEVERETO_DB_NAME",
+					"set": ""
+				},
+				{
+					"label": "CHEVERETO_DB_PREFIX",
+					"name": "CHEVERETO_DB_PREFIX",
+					"set": ""
+				}
+			],
+			"image": "nmtan/chevereto:latest",
+			"logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/Chevereto.png",
+			"name": "Chevereto",
+			"platform": "linux",
+			"ports": [
+				"80/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Chevereto",
+			"type": 1,
+			"volumes": [
+				{
+					"container": "/var/www/html/images"
+				}
+			]
+		},
+		{
+			"categories": [
+				"Other",
+				"Tools"
+			],
+			"description": "Another application bookmark dashboard, with fun features.",
+			"image": "rmountjoy/dashmachine:latest",
+			"logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/dashmachine_logo.png",
+			"name": "dashmachine",
+			"platform": "linux",
+			"ports": [
+				"5000:5000/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "DashMachine",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/srv/dev-disk-by-label-Files/Config/Dashmachine",
+					"container": "/dashmachine/dashmachine/user_data"
+				}
+			]
+		},
+		{
+			"categories": [
+				"Backup",
+				"Cloud",
+				"Other",
+				"Productivity",
+				"Tools"
+			],
+			"description": "Free backup software to store encrypted backups online, Duplicati works with standard protocols like FTP, SSH, WebDAV as well as popular services like Microsoft OneDrive, Amazon Cloud Drive and S3, Google Drive, box.com, Mega, hubiC and many others.",
+			"env": [
+				{
+					"default": "998",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "100",
+					"label": "PGID",
+					"name": "PGID"
+				}
+			],
+			"image": "linuxserver/duplicati:latest",
+			"logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/duplicati-icon.png",
+			"name": "duplicati",
+			"platform": "linux",
+			"ports": [
+				"8200:8200/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Duplicati",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/srv/dev-disk-by-label-Files/Config/Duplicati",
+					"container": "/config"
+				},
+				{
+					"container": "/tmp"
+				},
+				{
+					"container": "/backups"
+				},
+				{
+					"container": "/source"
+				}
+			]
+		},
+		{
+			"categories": [
+				"Video",
+				"Music",
+				"Photos"
+			],
+			"description": "Emby organizes video, music, live TV, and photos from personal media libraries and streams them to smart TVs, streaming boxes and mobile devices. This container is packaged as a standalone emby Media Server.",
+			"env": [
+				{
+					"default": "998",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "100",
+					"label": "PGID",
+					"name": "PGID"
+				},
+				{
+					"label": "TZ",
+					"name": "TZ"
+				}
+			],
+			"image": "linuxserver/emby:latest",
+			"logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/emby.png",
+			"name": "emby",
+			"platform": "linux",
+			"ports": [
+				"8096:8096/tcp",
+				"8920:8920/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Emby",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/srv/dev-disk-by-label-Files/Config/Emby",
+					"container": "/config"
+				},
+				{
+					"bind": "/portainer/TV",
+					"container": "/data/tvshows"
+				},
+				{
+					"bind": "/portainer/Movies",
+					"container": "/data/movies"
+				}
+			]
+		},
+		{
+			"categories": [
+				"Other",
+				"Tools"
+			],
+			"description": "A Linux network-level advertisement and Internet tracker blocking application which acts as a DNS sinkhole.",
+			"image": "pihole/pihole:latest",
+			"logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/pihole.png",
+			"name": "pihole",
+			"note": "When the installation is complete, navigate to your.ip.goes.here:1010/admin. Follow the article \u003ca href='https://medium.com/@niktrix/getting-rid-of-systemd-resolved-consuming-port-53-605f0234f32f'\u003ehere\u003c/a\u003e if you run into issues binding to port 53.",
+			"platform": "linux",
+			"ports": [
+				"53:53/tcp",
+				"53:53/udp",
+				"67:67/udp",
+				"1010:80/tcp",
+				"4443:443/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Pi-Hole",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/srv/dev-disk-by-label-Files/Config/PiHole",
+					"container": "/etc/pihole"
+				},
+				{
+					"bind": "/srv/dev-disk-by-label-Files/Config/PiHole/DNS",
+					"container": "/etc/dnsmasq.d"
+				}
+			]
+		},
+		{
+			"categories": [
+				"Downloaders"
+			],
+			"description": "The qBittorrent project aims to provide an open-source software alternative to ÂµTorrent. qBittorrent is based on the Qt toolkit and libtorrent-rasterbar library.",
+			"env": [
+				{
+					"default": "998",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "100",
+					"label": "PGID",
+					"name": "PGID"
+				},
+				{
+					"default": "username",
+					"label": "VPN_USERNAME",
+					"name": "VPN_USERNAME"
+				},
+				{
+					"default": "password",
+					"label": "VPN_PASSWORD",
+					"name": "VPN_PASSWORD"
+				},
+				{
+					"default": "8080",
+					"label": "WEBUI_PORT_ENV",
+					"name": "WEBUI_PORT_ENV"
+				},
+				{
+					"default": "8999",
+					"label": "INCOMING_PORT_ENV",
+					"name": "INCOMING_PORT_ENV"
+				},
+				{
+					"default": "yes",
+					"label": "VPN_ENABLED",
+					"name": "VPN_ENABLED"
+				},
+				{
+					"default": "192.168.68.0/24",
+					"label": "LAN_NETWORK",
+					"name": "LAN_NETWORK"
+				}
+			],
+			"image": "markusmcnugen/qbittorrentvpn",
+			"logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/qbittorrent-icon.png",
+			"name": "qbittorrentvpn",
+			"platform": "linux",
+			"ports": [
+				"8080:8080/tcp",
+				"8999:8999/udp",
+				"8999:8999/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "qBittorrentVPN",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/srv/dev-disk-by-label-Files/Config/qBittorrent",
+					"container": "/config"
+				},
+				{
+					"bind": "/portainer/Downloads",
+					"container": "/downloads"
+				},
+				{
+					"bind": "/etc/timezone",
+					"container": "/etc/timezone"
+				}
+			]
+		},
+		{
+			"categories": [
+				"Downloaders",
+				"Video"
+			],
+			"description": "Radarr - A fork of Sonarr to work with movies Ã  la Couchpotato.",
+			"env": [
+				{
+					"default": "998",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "100",
+					"label": "PGID",
+					"name": "PGID"
+				}
+			],
+			"image": "linuxserver/radarr:latest",
+			"logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/radarr.png",
+			"name": "radarr",
+			"platform": "linux",
+			"ports": [
+				"7878:7878/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Radarr",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/srv/dev-disk-by-label-Files/Config/Radarr",
+					"container": "/config"
+				},
+				{
+					"bind": "/portainer/Downloads",
+					"container": "/downloads"
+				},
+				{
+					"bind": "/portainer/Movies",
+					"container": "/movies"
+				}
+			]
+		},
+		{
+			"categories": [
+				"Management"
+			],
+			"description": null,
+			"env": [
+				{
+					"default": "998",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "100",
+					"label": "PGID",
+					"name": "PGID"
+				}
+			],
+			"image": "linuxserver/smokeping:latest",
+			"logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/smokeping-icon.png",
+			"name": "smokeping",
+			"platform": "linux",
+			"ports": [
+				"80/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "SmokePing",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/srv/dev-disk-by-label-Files/Config/Smokeping",
+					"container": "/config"
+				},
+				{
+					"bind": "/portainer/Files/AppData/Smokeping",
+					"container": "/data"
+				}
+			]
+		},
+		{
+			"categories": [
+				"Downloaders",
+				"Video"
+			],
+			"description": "Sonarr (formerly NZBdrone) is a PVR for usenet and bittorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them. It can also be configured to automatically upgrade the quality of files already downloaded when a better quality format becomes available.",
+			"env": [
+				{
+					"default": "998",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "100",
+					"label": "PGID",
+					"name": "PGID"
+				}
+			],
+			"image": "linuxserver/sonarr:latest",
+			"logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/sonarr-icon.png",
+			"name": "sonarr",
+			"platform": "linux",
+			"ports": [
+				"8989:8989/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Sonarr",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/srv/dev-disk-by-label-Files/Config/Sonarr",
+					"container": "/config"
+				},
+				{
+					"bind": "/dev/rtc",
+					"container": "/dev/rtc"
+				},
+				{
+					"bind": "/portainer/TV",
+					"container": "/tv"
+				},
+				{
+					"bind": "/portainer/Downloads",
+					"container": "/downloads"
+				}
+			]
+		},
+		{
+			"categories": [
+				"Other",
+				"Tools",
+				"Maintenance"
+			],
+			"description": "With watchtower you can update the running version of your containerized app simply by pushing a new image to the Docker Hub or your own image registry. Watchtower will pull down your new image, gracefully shut down your existing container and restart it with the same options that were used when it was deployed initially.",
+			"image": "containrrr/watchtower:latest",
+			"logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/watchtower.png",
+			"name": "watchtower",
+			"note": "It is recommended to manually update your containers but we're including this for those of you that don't care",
+			"platform": "linux",
+			"restart_policy": "unless-stopped",
+			"title": "Watchtower",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/var/run/docker.sock",
+					"container": "/var/run/docker.sock"
+				}
+			]
+		},
+		{
+			"categories": [
+				"Other",
+				"Tools"
+			],
+			"description": "Self-hosted, ad-free, privacy-respecting Google metasearch engine.",
+			"image": "benbusby/whoogle-search:latest",
+			"logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/whoogle.png",
+			"name": "whoogle",
+			"platform": "linux",
+			"ports": [
+				"5001:5000/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Whoogle",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/srv/dev-disk-by-label-Files/Config/Whoogle",
+					"container": "/config"
+				}
+			]
+		},
+		{
+			"categories": [
+				"Other",
+				"Downloaders"
+			],
+			"description": "YoutubeDL-Material is a Material Design frontend for youtube-dl. It's coded using Angular 9 for the frontend, and Node.js on the backend.",
+			"image": "tzahi12345/youtubedl-material:latest",
+			"logo": "https://raw.githubusercontent.com/SelfhostedPro/selfhosted_templates/master/Images/ytdlm.png",
+			"name": "youtubedl-material",
+			"platform": "linux",
+			"ports": [
+				"17442:17442/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "YouTubeDL-Material",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/srv/dev-disk-by-label-Files/Config/YTDLM",
+					"container": "/app/appdata"
+				},
+				{
+					"bind": "/srv/dev-disk-by-label-Files/YouTube/Video",
+					"container": "/app/video"
+				},
+				{
+					"bind": "/srv/dev-disk-by-label-Files/YouTube/Subscriptions",
+					"container": "/app/subscriptions"
+				},
+				{
+					"bind": "/srv/dev-disk-by-label-Files/YouTube/Users",
+					"container": "/app/users"
+				},
+				{
+					"bind": "/srv/dev-disk-by-label-Files/YouTube/Audio",
+					"container": "/app/audio"
+				}
+			]
+		}
+	]
+}
