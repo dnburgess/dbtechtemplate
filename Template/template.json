@@ -566,7 +566,7 @@
         "name": "LAN_NETWORK",
         "label": "LAN_NETWORK",
         "default": "192.168.68.0/24"
-      },					
+      }					
     ]
   },
   {
