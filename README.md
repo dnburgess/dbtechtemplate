@@ -1,7 +1,7 @@
 ### Notice:
 This was snagged from SelfhostedPro's repository. There was a lot of extra stuff in there I didn't want/need, so this is the DB Tech version of the application template for Portainer v1.x and v2.x.
 
-# Portainer Templates for Selfhosted Projects/Homelabs
+# Portainer Templates for DB Tech
 
 This is a template focused on helping people spin up selfhosted services using Portainer.
 
@@ -11,8 +11,6 @@ This is a template focused on helping people spin up selfhosted services using P
 
 1. A server/NAS with docker installed
 2. A Portainer setup.
-
-*Want something we don't have? Make an issue and we'll work on adding it*
 
 ### Installing
 
