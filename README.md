@@ -5,8 +5,6 @@ This was snagged from SelfhostedPro's repository. There was a lot of extra stuff
 
 This is a template focused on helping people spin up selfhosted services using Portainer.
 
-*for the OMV5 version use the OMV5 branch*
-
 ### Prerequisites
 
 1. A server/NAS with docker installed
